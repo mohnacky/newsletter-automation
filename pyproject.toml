@@ -9,7 +9,7 @@ description = "Config-driven pipeline that gathers, drafts, and renders a newsle
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "Nicholas Mohnacky" }]
+authors = [{ name = "Mohnacky Marketing DBA" }]
 keywords = ["newsletter", "email", "automation", "llm", "claude", "editorial"]
 dependencies = [
   "anthropic>=0.40",
