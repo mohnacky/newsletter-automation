@@ -107,11 +107,21 @@ class Renderer:
                 f'<p style="{self.body}"><strong>{name}</strong> {esc(pos.position)}</p>'
             )
         c = self.cfg.brand.colors
+        # Strip any quote marks the model added: the template supplies them, so
+        # a model-supplied pair renders as doubled punctuation.
+        quote = str(v.pull_quote or "").strip().strip('"\u201c\u201d').strip()
+        attribution = (getattr(v, "pull_quote_attribution", None) or "").strip()
+        cite = (
+            f'<br><span style="font-style:normal;font-size:14px;color:{c.muted};">'
+            f"&mdash; {esc(attribution)}</span>"
+            if attribution
+            else ""
+        )
         out.append(
             f'<blockquote style="margin:20px 0;padding:12px 18px;'
             f'border-left:3px solid {c.accent};font-family:{self.cfg.brand.font_stack};'
             f'font-size:18px;line-height:1.5;color:{c.ink};font-style:italic;">'
-            f"{esc(v.pull_quote)}</blockquote>"
+            f"&ldquo;{esc(quote)}&rdquo;{cite}</blockquote>"
         )
         out.append(self.signpost("Bottom line.", v.bottom_line))
         return "\n".join(out)

@@ -1,21 +1,47 @@
 # newsletter-automation
 
-A weekly newsletter, assembled by a pipeline and finished by a person.
+[![ci](https://github.com/mohnacky/newsletter-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/mohnacky/newsletter-automation/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](pyproject.toml)
 
-It reads your sources, drafts a structured issue with Claude, renders email
-HTML, and stages a draft for you to review. **It never sends.** The last step is
-always a human opening the draft, reading it, and pressing send.
+Newsletter tools automate the sending. The expensive part is the ninety minutes
+before that: reading the week, deciding what matters, and writing it down in the
+same shape every time.
+
+This automates the reading and the first draft, and deliberately stops there.
+It gathers your sources, drafts a structured issue with Claude, renders email
+HTML, and stages a draft. **Then you read it and press send.** Nothing here can
+send email on its own, and that is the feature.
 
 Bring your own keys and your own voice. Nothing about any particular newsletter
-is in the code: what you publish is defined in one YAML file.
+is in the code: what you publish is one YAML file.
 
 ```
 sources ──▶ gather ──▶ draft ──▶ lint ──▶ render ──▶ staged draft ──▶ you press send
              │           │        │                                      ▲
         cached per   one Claude  house rules                        the only
-          issue        call      in code                          automatic step
-                                                                    that isn't
+          issue        call      in code                          step that is
+                                                                  never automatic
 ```
+
+**Why a pipeline that cannot send.** A language model sits at one end of this
+and a list of real people sits at the other. The distance between "the draft is
+usually good" and "the draft is always safe to send unread" is the entire risk
+of the project, and no amount of prompt engineering closes it. So every
+delivery path stops at a draft, and every run writes a `sources.json` mapping
+each claim in the issue to the URL behind it, which turns review from an hour
+into a few minutes.
+
+Three more constraints follow from the same idea:
+
+- **Numbers in tables never pass through the model.** It writes the caption;
+  the figures are inserted from your data afterwards. A figure in a table
+  cannot be a hallucination because the model never sees one.
+- **Human-only sections stay empty unless you write them.** No note supplied,
+  no section.
+- **House rules are lint, not prompt text.** Banned phrases, section counts,
+  label order, "the lead must carry its counter-argument", every claim needs a
+  real source URL. A violation fails the run instead of shipping.
 
 ## Try it with no keys at all
 
@@ -33,21 +59,18 @@ That runs the whole pipeline on bundled fixtures and writes a complete issue to
 no network. The demo content is invented; every link in it points at
 `example.com`.
 
-## The idea
+## One config file, three jobs
 
-Most newsletter tooling automates the *sending*. The hard part is the ninety
-minutes before that: reading the week, deciding what matters, and writing it
-down in a consistent shape. This automates the reading and the first draft, and
-deliberately stops there.
-
-One config file drives three things that usually drift apart:
+The section list in `config/newsletter.yaml` drives three things that usually
+drift apart:
 
 - **the schema** the model must fill in,
 - **the brief** it is given,
 - **the layout** that gets rendered.
 
-Add a section to `config/newsletter.yaml` and all three follow. There is no
-second place to update.
+Add a section and all three follow. There is no second place to update, which
+is what stops a newsletter's structure quietly diverging from what its prompt
+claims it is.
 
 ## Define your newsletter
 
@@ -215,6 +238,12 @@ python -m unittest discover -s tests -v
 ```
 
 No keys, no network, no fixtures to download.
+
+## Contributing
+
+New gather sources are the most useful thing you could add, and the easiest:
+one function, one line in a registry. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+first — it has a scope section, and one rule that is not up for discussion.
 
 ## License
 

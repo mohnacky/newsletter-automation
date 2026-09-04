@@ -128,6 +128,24 @@ class TestRender(unittest.TestCase):
         self.assertNotIn("<script>", html)
         self.assertIn("&lt;script&gt;", html)
 
+    def test_pull_quote_punctuation_is_owned_by_the_renderer(self):
+        # A live run produced a model that wrapped its own quote marks around
+        # pull_quote and put the speaker inside it, rendering as doubled
+        # punctuation. The renderer strips and supplies both.
+        self.issue.debate.pull_quote = '"a quoted claim."'
+        self.issue.debate.pull_quote_attribution = "Someone"
+        html = render_body(self.cfg, self.issue, 1, "date")
+        self.assertIn("&ldquo;a quoted claim.&rdquo;", html)
+        self.assertNotIn('""', html)
+        self.assertIn("Someone", html)
+
+    def test_pull_quote_without_attribution_renders_clean(self):
+        self.issue.debate.pull_quote = "a claim"
+        self.issue.debate.pull_quote_attribution = None
+        html = render_body(self.cfg, self.issue, 1, "date")
+        self.assertIn("&ldquo;a claim&rdquo;", html)
+        self.assertNotIn("&mdash;", html)
+
     def test_utm_tagging_preserves_existing_query(self):
         tagged = tag_url("https://example.com/a?ref=x", "issue-007", "brief")
         self.assertIn("ref=x", tagged)

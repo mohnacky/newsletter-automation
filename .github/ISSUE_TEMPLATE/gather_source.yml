@@ -1,0 +1,31 @@
+name: New gather source
+description: Propose a source the pipeline could read from
+labels: [enhancement, gather-source]
+body:
+  - type: markdown
+    attributes:
+      value: New sources are the most welcome kind of contribution here.
+  - type: input
+    id: source
+    attributes:
+      label: The source
+      placeholder: "Hacker News front page / a specific API / a public dataset"
+    validations: { required: true }
+  - type: dropdown
+    id: auth
+    attributes:
+      label: Does it need a key?
+      options: ["No key needed", "Free tier key", "Paid key"]
+    validations: { required: true }
+  - type: textarea
+    id: shape
+    attributes:
+      label: What would it return?
+      description: Roughly the dict a `run()` would produce.
+      render: json
+  - type: checkboxes
+    id: offer
+    attributes:
+      label: Would you write it?
+      options:
+        - label: I would be willing to open the PR

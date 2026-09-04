@@ -1,0 +1,46 @@
+name: Bug report
+description: Something in the pipeline behaves differently than documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not paste API keys, subscriber data, or a full `.env`.
+        Redact before you post.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, and what it did instead of what you expected.
+      placeholder: |
+        I ran: newsletter --issue auto
+        I expected: ...
+        Instead: ...
+    validations: { required: true }
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Traceback or log output
+      description: The stderr from the run. Redact anything sensitive.
+      render: shell
+  - type: textarea
+    id: config
+    attributes:
+      label: The relevant part of your config
+      description: >
+        The section or gather entry involved. Trim it to what matters and
+        replace real feeds or domains if you would rather not share them.
+      render: yaml
+  - type: input
+    id: version
+    attributes:
+      label: Version and Python
+      placeholder: "v0.1.0, Python 3.11, macOS"
+    validations: { required: true }
+  - type: checkboxes
+    id: demo
+    attributes:
+      label: Does it reproduce in demo mode?
+      description: "`newsletter --demo` runs on fixtures with no keys, which separates your setup from the code."
+      options:
+        - label: I tried `newsletter --demo`

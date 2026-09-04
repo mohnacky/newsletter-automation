@@ -22,7 +22,10 @@ SHAPES = {
     "story": "one object: headline, what_happened, why_it_matters, url"
              " (add other_side when required)",
     "items": "a list of objects: headline, whats_new, why_it_matters, url",
-    "debate": "one object: positions (name, position, url), pull_quote, bottom_line",
+    "debate": "one object: positions (name, position, url), pull_quote, "
+              "pull_quote_attribution (who said it, name only), bottom_line. "
+              "Put no quotation marks around pull_quote and no attribution "
+              "inside it: both are added when the issue is rendered",
     "bullets": "a list of objects: label, fact, implication, url",
     "note": "one object: scene, why_it_matters",
     "table": "one object: caption only -- the rows are filled in from data "

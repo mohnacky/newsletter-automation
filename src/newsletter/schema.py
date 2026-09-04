@@ -44,7 +44,11 @@ class Debate(BaseModel):
     """Who is arguing what, and where it lands."""
 
     positions: List[Position]
+    # The quote itself, with no surrounding quotation marks and no attribution
+    # inside it. The renderer owns the punctuation, so a model that supplies
+    # its own produces doubled quote marks.
     pull_quote: str
+    pull_quote_attribution: Optional[str] = None
     bottom_line: str
 
 
