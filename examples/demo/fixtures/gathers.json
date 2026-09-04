@@ -1,0 +1,106 @@
+{
+  "_about": "Invented material for --demo. Every organisation, person, paper and URL here is fictional and every link points at example.com. Nothing in this file is a real claim about anyone.",
+  "headlines": {
+    "items": [
+      {
+        "title": "Northwind Systems opens its evaluation harness",
+        "url": "https://example.com/news/northwind-harness",
+        "published": "2026-09-01T14:00:00+00:00",
+        "summary": "Fictional vendor Northwind Systems released the test harness it uses internally, including 4,000 graded failure cases.",
+        "feed": "Example Trade Press"
+      },
+      {
+        "title": "Regulators publish draft disclosure rules for automated decisions",
+        "url": "https://example.com/news/draft-disclosure-rules",
+        "published": "2026-08-31T09:30:00+00:00",
+        "summary": "A fictional draft rule would require organisations to disclose when an automated system materially affects a customer decision.",
+        "feed": "Example Policy Wire"
+      },
+      {
+        "title": "Meridian Labs reports a 40 percent drop in serving cost",
+        "url": "https://example.com/news/meridian-serving-cost",
+        "published": "2026-08-30T18:15:00+00:00",
+        "summary": "Fictional company Meridian Labs attributes the drop to batching changes rather than new hardware.",
+        "feed": "Example Trade Press"
+      }
+    ]
+  },
+  "papers": {
+    "papers": [
+      {
+        "id": "0000.00001",
+        "title": "Measuring silent failure in retrieval-augmented pipelines",
+        "url": "https://example.com/papers/silent-failure",
+        "whats_new": "A fictional benchmark showing retrieval pipelines return confident answers from empty result sets in 12 percent of queries.",
+        "why_it_matters": "Worth checking whether your own pipeline distinguishes no results from bad results.",
+        "score": 91
+      },
+      {
+        "id": "0000.00002",
+        "title": "Cost-aware routing between model tiers",
+        "url": "https://example.com/papers/cost-aware-routing",
+        "whats_new": "A fictional routing method that sends only uncertain queries to the larger model, holding accuracy within one point.",
+        "why_it_matters": "The savings come from measuring uncertainty well, which is the part most teams skip.",
+        "score": 84
+      },
+      {
+        "id": "0000.00003",
+        "title": "What evaluation sets forget after six months",
+        "url": "https://example.com/papers/stale-evals",
+        "whats_new": "A fictional longitudinal study finding fixed evaluation sets stop predicting production quality after roughly two quarters.",
+        "why_it_matters": "An argument for rotating held-out cases on a schedule rather than freezing a benchmark.",
+        "score": 78
+      }
+    ]
+  },
+  "metrics": {
+    "rows": [
+      { "name": "Weekly active builders", "value": "18420", "change": "+3.1%" },
+      { "name": "Median inference cost / 1M tokens", "value": "$1.90", "change": "-12.0%" },
+      { "name": "Open incidents", "value": "7", "change": "+2" },
+      { "name": "Time to first response", "value": "4h 12m", "change": "-38m" }
+    ]
+  },
+  "policy": {
+    "buckets": {
+      "federal": [
+        {
+          "title": "Draft rule on automated decision disclosure",
+          "url": "https://example.com/policy/draft-rule",
+          "published": "2026-08-31",
+          "text": "Fictional draft text. Comment period runs 60 days. Applies to organisations above a size threshold."
+        }
+      ],
+      "global": [
+        {
+          "title": "Cross-border guidance on model documentation",
+          "url": "https://example.com/policy/cross-border-guidance",
+          "published": "2026-08-29",
+          "text": "Fictional guidance harmonising documentation expectations across three example jurisdictions."
+        }
+      ]
+    }
+  },
+  "discourse": {
+    "debates": [
+      {
+        "topic": "Whether open evaluation harnesses help or leak",
+        "positions": [
+          {
+            "who": "Dana Okafor",
+            "handle": "example_dana",
+            "summary": "Publishing the harness is the only way outside reviewers can reproduce a vendor's claims.",
+            "post_url": "https://example.com/posts/dana-1"
+          },
+          {
+            "who": "Sam Iversen",
+            "handle": "example_sam",
+            "summary": "An open harness becomes a target: teams tune to the test and the number stops meaning anything.",
+            "post_url": "https://example.com/posts/sam-1"
+          }
+        ],
+        "takeaway": "Both are right about different time horizons, which is why the release date of a benchmark matters as much as its contents."
+      }
+    ]
+  }
+}

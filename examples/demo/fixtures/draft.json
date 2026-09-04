@@ -1,0 +1,79 @@
+{
+  "_about": "A canned issue so --demo runs with no API key. Entirely fictional.",
+  "subject": "The evaluation problem nobody wants to own",
+  "preview_text": "An open test harness, a 12 percent silent failure rate, and a draft disclosure rule with a 60 day clock.",
+  "headline": "Everyone measures. Almost nobody re-measures.",
+  "thesis": "Three unrelated items this week point at the same gap: the tests teams trust were written once, and the systems they test have moved since.",
+  "read_minutes": 5,
+  "lead": {
+    "headline": "Northwind opens the harness it grades itself with",
+    "what_happened": "Northwind Systems published the internal evaluation harness behind its quality claims, including 4,000 graded failure cases it had not previously described.",
+    "why_it_matters": "Outside reviewers can now reproduce the numbers instead of taking them on faith, which is a higher bar than any vendor benchmark published this year.",
+    "url": "https://example.com/news/northwind-harness",
+    "other_side": "An open harness is also a target: once the test is public, teams optimise against it, and within a few quarters a high score may say more about tuning than about quality."
+  },
+  "research": [
+    {
+      "headline": "Retrieval pipelines fail quietly more often than they fail loudly",
+      "whats_new": "A benchmark of retrieval-augmented pipelines found confident answers returned from empty result sets in 12 percent of queries.",
+      "why_it_matters": "Check whether your pipeline can tell no results from bad results, because a confident empty answer never shows up in error rates.",
+      "url": "https://example.com/papers/silent-failure"
+    },
+    {
+      "headline": "Routing by uncertainty, not by rule",
+      "whats_new": "Sending only low-confidence queries to the larger model held accuracy within a point while cutting spend substantially.",
+      "why_it_matters": "The saving is entirely in the uncertainty estimate, which is the part most teams skip when they copy the pattern.",
+      "url": "https://example.com/papers/cost-aware-routing"
+    },
+    {
+      "headline": "Fixed evaluation sets go stale in about two quarters",
+      "whats_new": "A longitudinal study found frozen benchmarks stopped predicting production quality after roughly six months.",
+      "why_it_matters": "An argument for rotating held-out cases on a schedule instead of defending a number from last year.",
+      "url": "https://example.com/papers/stale-evals"
+    }
+  ],
+  "metrics_table": {
+    "caption": "Figures are drawn from the weekly export, not from anything written above.",
+    "rows": []
+  },
+  "debate": {
+    "positions": [
+      {
+        "name": "Dana Okafor",
+        "position": "argues that publishing the harness is the only way outside reviewers can reproduce a vendor's claims at all.",
+        "url": "https://example.com/posts/dana-1"
+      },
+      {
+        "name": "Sam Iversen",
+        "position": "counters that an open harness becomes a target, and that teams will tune to the test until the number stops meaning anything.",
+        "url": "https://example.com/posts/sam-1"
+      }
+    ],
+    "pull_quote": "A benchmark is only honest until the people it measures can read it.",
+    "bottom_line": "Both hold on different time horizons, which is why the publication date of a benchmark matters nearly as much as its contents."
+  },
+  "signals": [
+    {
+      "label": "Policy",
+      "fact": "A draft rule would require disclosure when an automated system materially affects a customer decision.",
+      "implication": "so the 60 day comment window is the cheapest chance to shape it.",
+      "url": "https://example.com/policy/draft-rule"
+    },
+    {
+      "label": "Industry",
+      "fact": "Meridian Labs reported a 40 percent drop in serving cost from batching changes rather than new hardware.",
+      "implication": "which suggests most teams still have scheduling headroom before they need to buy anything.",
+      "url": "https://example.com/news/meridian-serving-cost"
+    },
+    {
+      "label": "Research",
+      "fact": "Cross-border guidance on model documentation was published for three jurisdictions.",
+      "implication": "worth reading before writing a documentation process you will have to redo.",
+      "url": "https://example.com/policy/cross-border-guidance"
+    }
+  ],
+  "note": {
+    "scene": "A reader wrote in with a pipeline that had been returning answers from an empty index for eleven days without a single alert firing.",
+    "why_it_matters": "Nothing was broken by any measure the team had. That is the failure mode this issue is about."
+  }
+}

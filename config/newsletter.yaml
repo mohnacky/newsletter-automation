@@ -1,0 +1,148 @@
+# Your newsletter, defined once. Everything here drives three things at the
+# same time: the schema the editorial model must fill, the brief it is given,
+# and the rendered output. Change a section here and all three follow.
+#
+# This starter file is the demo newsletter with the fixtures removed. Edit it
+# in place, or point --config at your own copy.
+
+brand:
+  name: The Example Brief
+  tagline: A weekly read on one industry
+  from_name: The Example Brief
+  from_email: hello@example.com
+  site_url: https://example.com
+  # Required in commercial email (CAN-SPAM). Assembly fails without it.
+  address: 123 Example Street, Suite 100, Anytown, ST 00000
+  font_stack: "Helvetica,Arial,sans-serif"
+  colors:
+    ink: "#1F2430"
+    muted: "#6B7280"
+    accent: "#2563EB"
+    rule: "#E5E7EB"
+    page: "#FFFFFF"
+
+model: claude-opus-5
+max_tokens: 16000
+prompt: editorial.md
+delivery: file          # file | sendgrid
+send_day: Wednesday
+
+# --- What the pipeline reads before it writes -----------------------------
+# Each entry names a source module and passes it options. Sources that need a
+# key degrade to a stub when it is missing; the run continues.
+gather:
+  - id: headlines
+    source: rss
+    days: 7
+    per_feed: 5
+    # Your feeds. Any RSS or Atom URL works: trade press, company blogs,
+    # release notes, government feeds, a competitor's newsletter.
+    feeds:
+      - https://example.com/feed.xml
+      - https://example.org/rss
+
+  - id: papers
+    source: arxiv
+    categories: [cs.AI, cs.CL, cs.LG]
+    days: 7
+    keep: 6
+    themes: >
+      practical consequence for people building and deploying systems:
+      reliability, evaluation, cost, and failure modes
+
+  - id: metrics
+    source: rows
+    path: examples/demo/fixtures/metrics.csv
+
+  # Needs EXA_API_KEY. Delete the block if you do not use it.
+  - id: policy
+    source: web_search
+    days: 7
+    per_bucket: 2
+    buckets:
+      federal:
+        query: federal government technology regulation
+        domains: [congress.gov, whitehouse.gov, ftc.gov, apnews.com]
+      global:
+        query: international technology regulation
+        domains: [digital-strategy.ec.europa.eu, oecd.org, gov.uk]
+
+  # Needs XAI_API_KEY and bills per tool call. Disabled by default.
+  - id: discourse
+    source: x_search
+    enabled: false
+    days: 7
+    topics: 3
+    handles: []
+
+# --- The issue itself ------------------------------------------------------
+# type: story | items | debate | bullets | note | table
+sections:
+  - id: lead
+    type: story
+    kicker: Lead
+    title: What happened this week
+    required: true
+    both_sides: true          # forces the strongest counter-case into the lead
+    guidance: >
+      Pick the one story with the widest consequence for the reader, not the
+      loudest one. Lead with what changed, not with who announced it.
+
+  - id: research
+    type: items
+    kicker: Research
+    title: Worth reading
+    min: 2
+    max: 3
+    framing: New work that changes what is possible or what is safe to assume.
+    guidance: >
+      Choose papers a practitioner could act on. Say what is new in one
+      sentence, then what to do or watch in one more.
+
+  - id: metrics_table
+    type: table
+    kicker: By the numbers
+    title: Where things stand
+    rows_from: metrics        # rows come from the gather stage with this id
+    columns:
+      - { key: name, label: Metric }
+      - { key: value, label: Latest }
+      - { key: change, label: Change }
+    guidance: >
+      Write only the caption: one sentence on what the table shows. The figures
+      are inserted from data after you write, so never state one yourself.
+
+  - id: debate
+    type: debate
+    kicker: Debate
+    title: Where people disagree
+    guidance: >
+      Two or three named positions with links, then the pull quote, then where
+      it actually lands. Represent the strongest version of each side.
+
+  - id: signals
+    type: bullets
+    kicker: Signals
+    title: Three things worth knowing
+    labels: [Policy, Industry, Research]   # exact set and order, one each
+    guidance: One sentence of fact, one clause of consequence, and the source.
+
+  - id: note
+    type: note
+    kicker: Desk note
+    title: One thing we saw
+    source: human             # only written from --notes; never invented
+    guidance: >
+      Use the supplied note. If none was supplied, set this section to null.
+
+# --- House rules enforced after synthesis ---------------------------------
+# The prompt asks; these guarantee. A violation fails the run instead of
+# shipping.
+style:
+  banned_characters: []       # e.g. ["—", "–"] to ban em and en dashes
+  banned_phrases:
+    - game changer
+    - in today's fast-paced
+    - delve into
+  max_subject_chars: 65
+  require_urls: true

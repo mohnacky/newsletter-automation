@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<title>{{ brand_name }}</title>
+</head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+{{ preheader }}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F3F4F6;">
+  <tr>
+    <td align="center" style="padding:24px 12px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0"
+             style="width:100%;max-width:600px;background:{{ color_page }};border-radius:8px;">
+        <tr>
+          <td style="padding:28px 28px 8px 28px;">
+            <p style="font-family:{{ font_stack }};font-size:15px;font-weight:700;
+                      letter-spacing:1px;text-transform:uppercase;color:{{ color_accent }};margin:0;">
+              <a href="{{ site_url }}" style="color:{{ color_accent }};text-decoration:none;">{{ brand_name }}</a>
+            </p>
+            <p style="font-family:{{ font_stack }};font-size:13px;color:{{ color_muted }};margin:4px 0 0 0;">{{ tagline }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:16px 28px 28px 28px;">
+{{ content }}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:20px 28px 28px 28px;border-top:1px solid {{ color_rule }};">
+            <p style="font-family:{{ font_stack }};font-size:12px;line-height:1.6;color:{{ color_muted }};margin:0;">
+              You are receiving this because you subscribed to {{ brand_name }}.<br>
+              <a href="{{ unsubscribe_url }}" style="color:{{ color_muted }};">Unsubscribe</a> &middot;
+              <a href="{{ preferences_url }}" style="color:{{ color_muted }};">Email preferences</a><br>
+              {{ address }}
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
